@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const mongoose = require('mongoose')
 
-const AdminBroPlugin = require('../plugin')
+const AdminBroPlugin = require('admin-bro-hapijs')
 
 // loading models definition
 require('./mongoose/admin-model')

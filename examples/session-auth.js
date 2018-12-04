@@ -2,7 +2,7 @@ const Hapi = require('hapi')
 const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 
-const AdminBroPlugin = require('../plugin')
+const AdminBroPlugin = require('admin-bro-hapijs')
 const AdminModel = require('./mongoose/admin-model')
 
 /**
