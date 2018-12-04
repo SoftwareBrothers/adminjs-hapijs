@@ -1,6 +1,6 @@
 # Hapijs plugin for AdminBro
 
-This is an official [AdminBro](https://github.com/SoftwareBrothers/admin-bro) plugin which integrates it to hapijs framework.
+This is an official [AdminBro](https://github.com/SoftwareBrothers/admin-bro) plugin which integrates it to [hapijs](https://hapijs.com/) framework.
 
 ## Usage
 
