@@ -40,7 +40,7 @@ To see all standard admin-bro options - please visit: https://github.com/Softwar
 
 ### Word about the authentication
 
-There are a couple of things worth notice when setting up authentication for you AdminBro routes:
+There are a couple of things worth notice when setting up an authentication for you AdminBro routes:
 
 1. By default, if you won't give `options.auth` - admin panel will be available without the authentication.
 2. You can set whatever authentication you prefer for admin routes by setting `options.auth.strategy`. For example:
