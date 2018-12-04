@@ -1,10 +1,5 @@
 /**
- * Plugin definition for Hapi.js framework. To se how you can use it
- * see {@link examples/hapijs/index.js}
- *
- * @see module:examples/hapijs~start
- *
- * @module Integrations/hapijs
+ * Plugin definition for Hapi.js framework.
  */
 
 const Boom = require('boom')
