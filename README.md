@@ -45,7 +45,7 @@ There are a couple of things worth notice when setting up an authentication for 
 1. By default, if you won't give `options.auth` - admin panel will be available without the authentication.
 2. You can set whatever authentication you prefer for admin routes by setting `options.auth.strategy`. For example:
 
-```
+```javascript
 ...
 await server.register(require('hapi-auth-basic'))
 server.auth.strategy('simple', 'basic', { validate })
@@ -65,7 +65,7 @@ await server.register({
 
 4. There is a helper method for rendering the login page:
 
-```
+```javascript
 const action = '/admin/login'
 const errorMessage = 'There was a problem with your login and/or password'
 
@@ -80,11 +80,11 @@ In examples folder we prepared 2 working examples:
 
 You can run one of them by typing:
 
-```
+```bash
 PORT=8080 MONGO_URL=mongodb://localhost:27017/yourserver node examples/simple.js
 ```
 
-and then visit http://localhost:8080/admin
+and then visit `http://localhost:8080/admin`
 
 
 ## License
