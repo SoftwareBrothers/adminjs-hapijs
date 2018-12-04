@@ -14,6 +14,25 @@ const SessionAuth = require('./extensions/session-auth')
 module.exports = {
   name: 'AdminBro',
   version: '1.0.0',
+  /**
+   * registration of the plugin
+   * @param  {Object} server                          hapijs server
+   * @param  {Object} options                         options passed to AdminBro
+   * @param  {Object} options.auth
+   * @param  {Object} [options.auth.authenticate]     function taking email and password
+   *                                                  as an arguments. Should return logged in
+   *                                                  user or null (no authorization). If given
+   *                                                  options.auth.strategy is set to 'session'.
+   * @param  {Object} [options.auth.strategy]         auth strategy for hapijs routes. By default
+   *                                                  set to none - all admin routes will be
+   *                                                  available without authentication
+   * @param  {Object} [options.auth.cookieName=adminBro] When auth strategy is set to session this
+   *                                                     will be the name for the cookie.
+   * @param  {Object} [options.auth.cookiePassword]   cookie password for session strategy
+   * @param  {Object} [options.auth.isSecure=false]   if cookie should be accessible only via HTTPS,
+   *                                                  default to false
+   * @return {AdminBro}                               adminBro instance
+   */
   register: async (server, options) => {
     const admin = new AdminBro(options)
     let authStrategy = options.auth && options.auth.strategy
@@ -61,8 +80,15 @@ module.exports = {
 
     return admin
   },
-
-  renderLogin: async (params) => {
-    return AdminBro.renderLogin(params)
+  /**
+   * Renders the login page.
+   * @param  {Object} params
+   * @param  {Object} params.action           http form action url: i.e. `/admin/login`
+   * @param  {Object} [params.errorMessage]   when given - form whil print an error with
+   *                                          this message
+   * @return {String}                         html page
+   */
+  renderLogin: async ({ action, errorMessage }) => {
+    return AdminBro.renderLogin({ action, errorMessage })
   },
 }
