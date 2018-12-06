@@ -1,5 +1,5 @@
 {
-  "name": "admin-hapijs-example",
+  "name": "admin-bro-hapijs",
   "version": "0.1.0",
   "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
   "main": "index.js",
