@@ -2,8 +2,12 @@ const Hapi = require('hapi')
 const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 
+const AdminBro = require('admin-bro')
 const AdminBroPlugin = require('admin-bro-hapijs')
+const AdminBroMongoose = require('admin-bro-mongoose')
 const AdminModel = require('./mongoose/admin-model')
+
+AdminBro.registerAdapter(AdminBroMongoose)
 
 /**
  * Creates first admin test@example.com:password when there are no
