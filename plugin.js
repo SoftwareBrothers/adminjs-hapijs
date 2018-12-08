@@ -7,8 +7,6 @@ const inert = require('inert')
 const AdminBro = require('admin-bro')
 const SessionAuth = require('./extensions/session-auth')
 
-console.log(AdminBro.VERSION)
-
 module.exports = {
   name: 'AdminBro',
   version: '0.1.0',
