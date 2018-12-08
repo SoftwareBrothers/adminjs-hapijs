@@ -8,6 +8,7 @@ The plugin can be registered using standard `server.register` method.
 
 ```javascript
 const AdminBroPlugin = require('admin-bro-hapijs')
+
 const standardAdminBroOptions = {
   branding: {
     companyName: 'Amazing c.o.',

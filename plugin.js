@@ -11,7 +11,7 @@ console.log(AdminBro.VERSION)
 
 module.exports = {
   name: 'AdminBro',
-  version: '1.0.1',
+  version: '0.1.0',
   /**
    * registration of the plugin
    * @param  {Object} server                          hapijs server
