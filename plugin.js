@@ -3,12 +3,15 @@
  */
 
 const Boom = require('boom')
+const inert = require('inert')
 const AdminBro = require('admin-bro')
 const SessionAuth = require('./extensions/session-auth')
 
+console.log(AdminBro.VERSION)
+
 module.exports = {
   name: 'AdminBro',
-  version: '1.0.0',
+  version: '1.0.1',
   /**
    * registration of the plugin
    * @param  {Object} server                          hapijs server
@@ -31,7 +34,7 @@ module.exports = {
   register: async (server, options) => {
     const admin = new AdminBro(options)
     let authStrategy = options.auth && options.auth.strategy
-    const routes = new AdminBro.Routes({ admin }).all()
+    const { routes, assets } = AdminBro.Router
 
     if (options.auth && options.auth.authenticate) {
       if (authStrategy && authStrategy !== 'session') {
@@ -69,6 +72,18 @@ module.exports = {
             console.log(e)
             throw Boom.boomify(e)
           }
+        },
+      })
+    })
+
+    await server.register(inert)
+
+    assets.forEach((asset) => {
+      server.route({
+        method: 'GET',
+        path: `${admin.options.rootPath}${asset.path}`,
+        handler: {
+          file: () => asset.src,
         },
       })
     })
