@@ -9,7 +9,7 @@ const SessionAuth = require('./extensions/session-auth')
 
 module.exports = {
   name: 'AdminBro',
-  version: '0.1.0',
+  version: '0.1.1',
   /**
    * registration of the plugin
    * @param  {Object} server                          hapijs server
