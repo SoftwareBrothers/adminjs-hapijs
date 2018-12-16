@@ -1,6 +1,6 @@
 {
   "name": "admin-bro-hapijs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "admin-bro": "^0.1.1",
+    "admin-bro": ">=0.2.0",
     "boom": "^7.3.0",
     "hapi": "^17.8.1",
     "hapi-auth-cookie": "^9.1.0",
