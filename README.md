@@ -2,6 +2,17 @@
 
 This is an official [AdminBro](https://github.com/SoftwareBrothers/admin-bro) plugin which integrates it to [hapijs](https://hapijs.com/) framework.
 
+## Dependencies
+
+Plugin depends on following packages and they have to be installed:
+
+* boom
+* inert
+
+And, if you want to use build in auth:
+
+* hapi-auth-cookie
+
 ## Usage
 
 The plugin can be registered using standard `server.register` method.
