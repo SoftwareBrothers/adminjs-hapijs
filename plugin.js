@@ -96,7 +96,7 @@ module.exports = {
    *                                          this message
    * @return {String}                         html page
    */
-  renderLogin: async ({ action, errorMessage }) => {
-    return AdminBro.renderLogin({ action, errorMessage })
-  },
+  renderLogin: async ({ action, errorMessage }) => (
+    AdminBro.renderLogin({ action, errorMessage })
+  ),
 }

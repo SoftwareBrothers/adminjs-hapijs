@@ -59,7 +59,7 @@ const sessionAuth = async (server, options, AdminBro) => {
         return AdminBro.renderLogin({ action: loginPath, errorMessage })
       } catch (e) {
         console.log(e)
-        throw(e)
+        throw e
       }
     },
   })

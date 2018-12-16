@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "simple": "nodemon examples/simple.js",
-    "session-auth": "nodemon examples/session-auth.js"
+    "session-auth": "nodemon examples/session-auth.js",
+    "lint": "./node_modules/eslint/bin/eslint.js './extensions/**/*.js' './examples/**/*.js' './plugin.js'"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
@@ -34,6 +35,13 @@
     "bcrypt": "^3.0.2",
     "mongoose": "^5.3.14",
     "nodemon": "^1.18.7",
-    "require.all": "^2.0.4"
+    "require.all": "^2.0.4",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "hapi-auth-cookie": "^9.1.0",
+    "inert": "^5.1.2"
   }
 }
