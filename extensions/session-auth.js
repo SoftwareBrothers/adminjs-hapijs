@@ -9,6 +9,7 @@ const HapiAuthCookie = require('hapi-auth-cookie')
  * @param  {String} options.cookiePassword
  * @param  {Function} options.authenticate
  * @param  {Boolean} options.isSecure
+ * @param  {String} options.defaultMessage      message which is seen on login page
  * @param  {AdminBro} AdminBro
  */
 const sessionAuth = async (server, options, AdminBro) => {
@@ -19,6 +20,7 @@ const sessionAuth = async (server, options, AdminBro) => {
     cookieName,
     authenticate,
     isSecure,
+    defaultMessage,
   } = options
 
   // example authentication is based on the cookie store
@@ -40,7 +42,7 @@ const sessionAuth = async (server, options, AdminBro) => {
     },
     handler: async (request, h) => {
       try {
-        let errorMessage = null
+        let errorMessage = defaultMessage
         if (request.method === 'post') {
           const { email, password } = request.payload
           const admin = await authenticate(email, password)
