@@ -61,7 +61,7 @@ To restrict access you can pass `auth` via plugin options.
 
 ### Authentication options
 
-Plugin receives all (available AdminBro options)[https://softwarebrothers.github.io/admin-bro/global.html#AdminBroOptions] and one special parameter: `auth` which controls the authentication.
+Plugin receives all [available AdminBro options](https://softwarebrothers.github.io/admin-bro/global.html#AdminBroOptions) and one special parameter: `auth` which controls the authentication.
 
 1. By default, if you won't give `options.auth` - admin panel will be available without the authentication (like in the simplest example above)
 2. You can set whatever authentication you prefer for admin routes by setting `options.auth.strategy`. For example:
