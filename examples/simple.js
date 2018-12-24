@@ -2,8 +2,8 @@ const Hapi = require('hapi')
 const mongoose = require('mongoose')
 
 const AdminBro = require('admin-bro')
-const AdminBroPlugin = require('admin-bro-hapijs')
 const AdminBroMongoose = require('admin-bro-mongoose')
+const AdminBroPlugin = require('../index')
 
 AdminBro.registerAdapter(AdminBroMongoose)
 

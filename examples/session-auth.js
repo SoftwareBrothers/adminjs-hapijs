@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 
 const AdminBro = require('admin-bro')
-const AdminBroPlugin = require('admin-bro-hapijs')
 const AdminBroMongoose = require('admin-bro-mongoose')
 const AdminModel = require('./mongoose/admin-model')
+const AdminBroPlugin = require('../index')
 
 AdminBro.registerAdapter(AdminBroMongoose)
 
@@ -13,7 +13,7 @@ AdminBro.registerAdapter(AdminBroMongoose)
  * Creates first admin test@example.com:password when there are no
  * admins in the database
  */
-const createAdminIfNone = async () => {
+const createAdmin\IfNone = async () => {
   const existingAdmin = await AdminModel.countDocuments() > 0
   if (!existingAdmin) {
     const password = await Bcrypt.hash('password', 10)
