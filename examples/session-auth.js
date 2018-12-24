@@ -13,7 +13,7 @@ AdminBro.registerAdapter(AdminBroMongoose)
  * Creates first admin test@example.com:password when there are no
  * admins in the database
  */
-const createAdmin\IfNone = async () => {
+const createAdminIfNone = async () => {
   const existingAdmin = await AdminModel.countDocuments() > 0
   if (!existingAdmin) {
     const password = await Bcrypt.hash('password', 10)
