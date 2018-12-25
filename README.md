@@ -149,7 +149,7 @@ In examples folder we prepared 2 working examples:
 * [integration with cookie auth](examples/session-auth.js)
 
 You can run one of them by typing:
-(assume you have mongodbe running on port `27017`)
+(assume you have mongodb running on port `27017`)
 
 ```bash
 PORT=8080 MONGO_URL=mongodb://localhost:27017/yourserver node examples/simple.js
