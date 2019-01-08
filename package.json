@@ -1,6 +1,6 @@
 {
   "name": "admin-bro-hapijs",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
   "main": "index.js",
   "scripts": {

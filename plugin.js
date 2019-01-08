@@ -9,7 +9,7 @@ const SessionAuth = require('./extensions/session-auth')
 
 module.exports = {
   name: 'AdminBro',
-  version: '0.1.6',
+  version: '0.1.7',
   /**
    * registration of the plugin
    * @param  {Object} server                          hapijs server
@@ -79,7 +79,7 @@ module.exports = {
     assets.forEach((asset) => {
       server.route({
         method: 'GET',
-        options: { auth: authStrategy },
+        options: { auth: false },
         path: `${admin.options.rootPath}${asset.path}`,
         handler: {
           file: () => asset.src,
