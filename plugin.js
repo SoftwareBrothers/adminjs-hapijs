@@ -79,6 +79,7 @@ module.exports = {
     assets.forEach((asset) => {
       server.route({
         method: 'GET',
+        options: { auth: authStrategy },
         path: `${admin.options.rootPath}${asset.path}`,
         handler: {
           file: () => asset.src,
