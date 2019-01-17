@@ -6,6 +6,7 @@ const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
 const SessionAuth = require('./extensions/session-auth')
+const path = require('path')
 
 module.exports = {
   name: 'AdminBro',
@@ -82,7 +83,10 @@ module.exports = {
         options: { auth: false },
         path: `${admin.options.rootPath}${asset.path}`,
         handler: {
-          file: () => asset.src,
+          file: {
+            path: path.resolve(asset.src),
+            confine: false,
+          },
         },
       })
     })
