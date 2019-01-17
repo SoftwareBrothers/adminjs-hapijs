@@ -2,11 +2,11 @@
  * Plugin definition for Hapi.js framework.
  */
 
+const path = require('path')
 const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
 const SessionAuth = require('./extensions/session-auth')
-const path = require('path')
 
 module.exports = {
   name: 'AdminBro',
