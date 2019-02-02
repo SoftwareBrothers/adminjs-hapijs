@@ -1,7 +1,3 @@
-/**
- * Plugin definition for Hapi.js framework.
- */
-
 const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
@@ -11,7 +7,9 @@ module.exports = {
   name: 'AdminBro',
   version: '0.1.7',
   /**
-   * registration of the plugin
+   * Actual method which Hapi uses under the hood - when you call server.register(plugin, options) method.
+   * Options you give in Hapi are passed back to it.
+   *
    * @param  {Object} server                          hapijs server
    * @param  {Object} options                         options passed to AdminBro
    * @param  {Object} options.auth
@@ -28,6 +26,49 @@ module.exports = {
    * @param  {Object} [options.auth.isSecure=false]   if cookie should be accessible only via HTTPS,
    *                                                  default to false
    * @return {AdminBro}                               adminBro instance
+   * @function register
+   * @static
+   * @memberof module:admin-bro-hapijs
+   * @example
+   * const AdminBroPlugin = require('admin-bro-hapijs')
+   * const Hapi = require('hapi')
+   * 
+   * // see AdminBro documentation about setting up the database.
+   * const yourDatabase = require('your-database-setup-file')
+   * 
+   * const ADMIN = {
+   *   email: 'text@example.com',
+   *   password: 'password',
+   * }
+   * 
+   * const adminBroOptions = {
+   *   resources: [yourDatabase],
+   * 
+   *   auth: {
+   *     authenticate: (email, password) => {
+   *       if (ADMIN.email === email && ADMIN.password === password) {
+   *         return ADMIN
+   *       }
+   *       return null
+   *     },
+   *     strategy: 'session',
+   *     cookieName: 'adminBroCookie',
+   *     cookiePassword: process.env.COOKIE_PASSWORD || 'makesurepasswordissecure',
+   *     isSecure: true, //only https requests
+   *   },
+   * }
+   * 
+   * const server = Hapi.server({ port: process.env.PORT || 8080 })
+   * const start = async () => {
+   *   await server.register({
+   *     plugin: AdminBroPlugin,
+   *     options: adminBroOptions,
+   *   })
+   * 
+   *   await server.start()
+   * }
+   * 
+   * start()
    */
   register: async (server, options) => {
     const admin = new AdminBro(options)
@@ -90,12 +131,8 @@ module.exports = {
     return admin
   },
   /**
-   * Renders the login page.
-   * @param  {Object} params
-   * @param  {Object} params.action           http form action url: i.e. `/admin/login`
-   * @param  {Object} [params.errorMessage]   when given - form whil print an error with
-   *                                          this message
-   * @return {String}                         html page
+   * Renders login page. It simply invokes {@link AdminBro.renderLogin}
+   * @memberof module:admin-bro-hapijs
    */
   renderLogin: async ({ action, errorMessage }) => (
     AdminBro.renderLogin({ action, errorMessage })

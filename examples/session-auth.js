@@ -12,6 +12,7 @@ AdminBro.registerAdapter(AdminBroMongoose)
 /**
  * Creates first admin test@example.com:password when there are no
  * admins in the database
+ * @ignore
  */
 const createAdminIfNone = async () => {
   const existingAdmin = await AdminModel.countDocuments() > 0

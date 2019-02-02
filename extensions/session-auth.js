@@ -11,6 +11,7 @@ const HapiAuthCookie = require('hapi-auth-cookie')
  * @param  {Boolean} options.isSecure
  * @param  {String} options.defaultMessage      message which is seen on login page
  * @param  {AdminBro} AdminBro
+ * @private
  */
 const sessionAuth = async (server, options, AdminBro) => {
   const {
