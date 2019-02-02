@@ -7,7 +7,8 @@ module.exports = {
   name: 'AdminBro',
   version: '0.1.7',
   /**
-   * Actual method which Hapi uses under the hood - when you call server.register(plugin, options) method.
+   * Actual method which Hapi uses under the hood - when you call
+   * server.register(plugin, options) method.
    * Options you give in Hapi are passed back to it.
    *
    * @param  {Object} server                          hapijs server
@@ -32,18 +33,18 @@ module.exports = {
    * @example
    * const AdminBroPlugin = require('admin-bro-hapijs')
    * const Hapi = require('hapi')
-   * 
+   *
    * // see AdminBro documentation about setting up the database.
    * const yourDatabase = require('your-database-setup-file')
-   * 
+   *
    * const ADMIN = {
    *   email: 'text@example.com',
    *   password: 'password',
    * }
-   * 
+   *
    * const adminBroOptions = {
    *   resources: [yourDatabase],
-   * 
+   *
    *   auth: {
    *     authenticate: (email, password) => {
    *       if (ADMIN.email === email && ADMIN.password === password) {
@@ -57,17 +58,17 @@ module.exports = {
    *     isSecure: true, //only https requests
    *   },
    * }
-   * 
+   *
    * const server = Hapi.server({ port: process.env.PORT || 8080 })
    * const start = async () => {
    *   await server.register({
    *     plugin: AdminBroPlugin,
    *     options: adminBroOptions,
    *   })
-   * 
+   *
    *   await server.start()
    * }
-   * 
+   *
    * start()
    */
   register: async (server, options) => {
@@ -108,6 +109,7 @@ module.exports = {
             const ret = await controller[route.action](request, h)
             return ret
           } catch (e) {
+            // eslint-disable-next-line no-console
             console.log(e)
             throw Boom.boomify(e)
           }
