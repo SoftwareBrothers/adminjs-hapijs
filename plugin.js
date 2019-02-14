@@ -21,8 +21,8 @@ module.exports = {
    * @param  {Object} [options.auth.strategy]         auth strategy for hapi.js routes. By default,
    *                                                  set to none - all admin routes will be
    *                                                  available without authentication
-   * @param  {Object} [options.auth.cookieName=adminBro] When auth strategy is set to 'session', this
-   *                                                     will be the name of the cookie
+   * @param  {Object} [options.auth.cookieName=adminBro] When auth strategy is set to 'session',
+   *                                                  this will be the name of the cookie
    * @param  {Object} [options.auth.cookiePassword]   cookie password for session strategy
    * @param  {Object} [options.auth.isSecure=false]   if cookie should be accessible only via HTTPS,
    *                                                  default to false
