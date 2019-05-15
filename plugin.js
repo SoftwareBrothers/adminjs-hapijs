@@ -107,7 +107,11 @@ module.exports = {
             const loggedInUser = request.auth && request.auth.credentials
             const controller = new route.Controller({ admin }, loggedInUser)
             const ret = await controller[route.action](request, h)
-            return ret
+            const response = h.response(ret)
+            if (route.contentType) {
+              response.type(route.contentType)
+            }
+            return response
           } catch (e) {
             // eslint-disable-next-line no-console
             console.log(e)
