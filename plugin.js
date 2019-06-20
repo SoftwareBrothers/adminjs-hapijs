@@ -2,10 +2,11 @@ const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
 const SessionAuth = require('./extensions/session-auth')
+const pkg = require('./package.json')
 
 module.exports = {
-  name: 'AdminBro',
-  version: '0.1.7',
+  name: pkg.name,
+  version: pkg.version,
   /**
    * Actual method that Hapi uses under the hood when you call
    * server.register(plugin, options) method.
@@ -73,6 +74,7 @@ module.exports = {
    */
   register: async (server, options) => {
     const admin = new AdminBro(options)
+    await admin.initialize()
     let authStrategy = options.auth && options.auth.strategy
     const { routes, assets } = AdminBro.Router
 
