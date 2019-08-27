@@ -14,7 +14,9 @@ module.exports = {
    *
    * @param  {Object} server                          Hapi.js server
    * @param  {Object} options                         options passed to AdminBro
-   * @param  {Object} options.auth
+   * @param  {Object} options.auth                    Authentication options. You can pass here
+   *                                                  options described below and any other option
+   *                                                  supported by the https://github.com/hapijs/cookie
    * @param  {Object} [options.auth.authenticate]     function takes email and password
    *                                                  as arguments. Should return a logged in
    *                                                  user or null (no authorization), if given
