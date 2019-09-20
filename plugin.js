@@ -1,3 +1,7 @@
+/**
+ * Plugin definition for Hapi.js framework.
+ */
+const path = require('path')
 const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
@@ -133,7 +137,10 @@ module.exports = {
         options: { auth: false },
         path: `${admin.options.rootPath}${asset.path}`,
         handler: {
-          file: () => asset.src,
+          file: {
+            path: path.resolve(asset.src),
+            confine: false,
+          },
         },
       })
     })
