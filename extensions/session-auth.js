@@ -3,7 +3,7 @@ const HapiAuthCookie = require('hapi-auth-cookie')
 /**
  * Creates authentication logic for admin users
  * @param  {Hapi} server            Hapi.js server instance
- * @param  {Object} options Configiration options passed to admin bro
+ * @param  {Object} options Configiration options passed to admin bro and hapi auth cookie
  * @param  {String} options.logoutPath
  * @param  {String} options.loginPath
  * @param  {String} options.cookiePassword
@@ -11,6 +11,7 @@ const HapiAuthCookie = require('hapi-auth-cookie')
  * @param  {Boolean} options.isSecure
  * @param  {String} options.defaultMessage      message which is seen on login page
  * @param  {AdminBro} AdminBro
+ * @private
  */
 const sessionAuth = async (server, options, AdminBro) => {
   const {
@@ -21,16 +22,20 @@ const sessionAuth = async (server, options, AdminBro) => {
     authenticate,
     isSecure,
     defaultMessage,
+    rootPath,
+    strategy,
+    ...other
   } = options
 
   // example authentication is based on the cookie store
   await server.register(HapiAuthCookie)
 
-  server.auth.strategy('session', 'cookie', {
+  server.auth.strategy(strategy, 'cookie', {
     password: cookiePassword,
     cookie: cookieName,
     redirectTo: loginPath,
     isSecure,
+    ...other,
   })
 
   server.route({
@@ -69,6 +74,7 @@ const sessionAuth = async (server, options, AdminBro) => {
   server.route({
     method: 'GET',
     path: logoutPath,
+    options: { auth: false },
     handler: async (request, h) => {
       request.cookieAuth.clear()
       return h.redirect(loginPath)
