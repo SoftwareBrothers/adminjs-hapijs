@@ -22,6 +22,7 @@ const sessionAuth = async (server, options, AdminBro) => {
     authenticate,
     isSecure,
     defaultMessage,
+    invalidAuthMessage = 'Wrong email and/or password',
     rootPath,
     strategy,
     ...other
@@ -55,7 +56,8 @@ const sessionAuth = async (server, options, AdminBro) => {
             request.cookieAuth.set(admin)
             return h.redirect(options.rootPath)
           }
-          errorMessage = 'Wrong email and/or password'
+
+          errorMessage = invalidAuthMessage
         }
 
         // AdminBro exposes function which renders login form for us.
