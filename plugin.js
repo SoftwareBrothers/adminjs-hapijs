@@ -1,12 +1,14 @@
-/**
- * Plugin definition for Hapi.js framework.
- */
 const path = require('path')
 const Boom = require('boom')
 const inert = require('inert')
 const AdminBro = require('admin-bro')
-const SessionAuth = require('./extensions/session-auth')
+const sessionAuth = require('./extensions/session-auth')
 const pkg = require('./package.json')
+
+/**
+ * Plugin definition for Hapi.js framework.
+ * @private
+ */
 
 module.exports = {
   name: pkg.name,
@@ -96,13 +98,7 @@ module.exports = {
         throw new Error('You have to give auth.cookiePassword parameter if you want to use authenticate function.')
       }
 
-      await SessionAuth(server, {
-        loginPath: admin.options.loginPath,
-        logoutPath: admin.options.logoutPath,
-        rootPath: admin.options.rootPath,
-        cookieName: 'admin-bro',
-        ...options.auth,
-      }, AdminBro)
+      await sessionAuth(server, admin)
     }
 
     routes.forEach((route) => {
