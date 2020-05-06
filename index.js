@@ -23,6 +23,7 @@
  *
  * ```javascript
  * const AdminBroPlugin = require('admin-bro-hapijs')
+ * const inert = require('inert')
  * const Hapi = require('hapi')
  *
  * const adminBroOptions = {
@@ -31,6 +32,7 @@
  *
  * const server = Hapi.server({ port: process.env.PORT || 8080 })
  * const start = async () => {
+ *   await server.register(inert)
  *   await server.register({
  *     plugin: AdminBroPlugin,
  *     options: adminBroOptions,
@@ -56,6 +58,7 @@
  * 
  * ```javascript
  * //...
+ * await server.register(require('innert'))
  * await server.register(require('hapi-auth-basic'))
  * server.auth.strategy('simple', 'basic', { validate })
  * 

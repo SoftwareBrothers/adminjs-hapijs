@@ -1,6 +1,5 @@
 const path = require('path')
 const Boom = require('boom')
-const inert = require('inert')
 const AdminBro = require('admin-bro')
 const sessionAuth = require('./extensions/session-auth')
 const pkg = require('./package.json')
@@ -124,8 +123,6 @@ module.exports = {
         },
       })
     })
-
-    await server.register(inert)
 
     assets.forEach((asset) => {
       server.route({
