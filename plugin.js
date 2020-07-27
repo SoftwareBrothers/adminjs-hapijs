@@ -1,7 +1,7 @@
 const path = require('path')
 const Boom = require('boom')
 const inert = require('inert')
-const AdminBro = require('admin-bro')
+const AdminBro = require('@admin-bro/core')
 const sessionAuth = require('./extensions/session-auth')
 const pkg = require('./package.json')
 
@@ -40,7 +40,7 @@ module.exports = {
    * @static
    * @memberof module:admin-bro-hapijs
    * @example
-   * const AdminBroPlugin = require('admin-bro-hapijs')
+   * const AdminBroPlugin = require('@admin-bro/hapi')
    * const Hapi = require('hapi')
    *
    * // see AdminBro documentation on database setup.

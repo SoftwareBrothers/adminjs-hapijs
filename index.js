@@ -5,7 +5,7 @@
  * ## Installation
  * 
  * ```sh
- * npm install admin-bro-hapijs boom inert
+ * npm install @admin-bro/hapi boom inert
  * ```
  * 
  * Plugin depends on the following packages and they have to be installed beforehand:
@@ -22,7 +22,7 @@
  * The simplest example:
  *
  * ```javascript
- * const AdminBroPlugin = require('admin-bro-hapijs')
+ * const AdminBroPlugin = require('@admin-bro/hapi')
  * const Hapi = require('hapi')
  *
  * const adminBroOptions = {
@@ -68,7 +68,7 @@
  * 
  * The strategy will be passed down to all AdminBro routes.
  * 
- * 3. admin-bro-hapijs plugin can be setup to use [auth-cookie](https://github.com/hapijs/hapi-auth-cookie). 
+ * 3. @admin-bro/hapi plugin can be setup to use [auth-cookie](https://github.com/hapijs/hapi-auth-cookie). 
  * Only thing you have to do is to define the following {@link module:admin-bro-hapijs.register auth options}: 
  * _authenticate_, _cookiePassword_, _isSecure_, _cookieName_.
  */

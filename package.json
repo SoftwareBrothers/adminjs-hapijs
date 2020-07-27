@@ -1,17 +1,18 @@
 {
-  "name": "admin-bro-hapijs",
+  "name": "@admin-bro/hapi",
   "version": "2.0.0",
   "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
   "main": "index.js",
   "scripts": {
     "simple": "nodemon examples/simple.js",
     "session-auth": "nodemon examples/session-auth.js",
-    "lint": "./node_modules/eslint/bin/eslint.js './extensions/**/*.js' './examples/**/*.js' './plugin.js'"
+    "lint": "./node_modules/eslint/bin/eslint.js './extensions/**/*.js' './examples/**/*.js' './plugin.js'",
+    "release": "semantic-release"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "admin-bro": ">=2.0.0",
+    "@admin-bro/core": ">=3.0.0-beta.1",
     "boom": "^7.3.0",
     "hapi": "^17.8.1",
     "hapi-auth-cookie": "^9.1.0",
@@ -32,8 +33,8 @@
     "admin-panel"
   ],
   "devDependencies": {
-    "admin-bro": "^2.0.0",
-    "admin-bro-mongoose": "^0.1.4",
+    "@admin-bro/core": ">=3.0.0-beta.1",
+    "@admin-bro/mongoose": "^1.0.0-beta.1",
     "boom": "^7.3.0",
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -41,7 +42,13 @@
     "hapi": "^17.8.1",
     "mongoose": "^5.3.14",
     "nodemon": "^1.18.7",
-    "require.all": "^2.0.4"
+    "require.all": "^2.0.4",
+    "semantic-release": "^17.0.7",
+    "semantic-release-jira-releases-sb": "^0.7.2",
+    "@semantic-release/git": "^9.0.0",
+    "husky": "^4.2.5",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4"
   },
   "dependencies": {
     "hapi-auth-cookie": "^9.1.0",
