@@ -1,6 +1,6 @@
 {
   "name": "@admin-bro/hapi",
-  "version": "3.0.0-beta.1",
+  "version": "2.0.0",
   "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
   "main": "index.js",
   "scripts": {
@@ -44,7 +44,6 @@
     "nodemon": "^1.18.7",
     "require.all": "^2.0.4",
     "semantic-release": "^17.0.7",
-    "semantic-release-jira-releases-sb": "^0.7.2",
     "@semantic-release/git": "^9.0.0",
     "husky": "^4.2.5",
     "@commitlint/cli": "^8.3.5",

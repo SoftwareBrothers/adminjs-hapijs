@@ -1,4 +1,4 @@
-const HapiAuthCookie = require('hapi-auth-cookie')
+const HapiAuthCookie = require('@hapi/cookie')
 
 /**
  * Creates authentication logic for admin users
