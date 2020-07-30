@@ -14,8 +14,8 @@
   "peerDependencies": {
     "@admin-bro/core": ">=3.0.0-beta.1",
     "@hapi/boom": "^9.1.0",
-    "@hapi/hapi": "^19.2.0",
     "@hapi/cookie": "^11.0.0",
+    "@hapi/hapi": "^19.2.0",
     "@hapi/inert": "^6.0.1"
   },
   "bugs": {
@@ -35,19 +35,20 @@
   "devDependencies": {
     "@admin-bro/core": ">=3.0.0-beta.1",
     "@admin-bro/mongoose": "^1.0.0-beta.1",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@hapi/boom": "^9.1.0",
     "@hapi/hapi": "^19.2.0",
+    "@semantic-release/git": "^9.0.0",
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "husky": "^4.2.5",
     "mongoose": "^5.3.14",
     "nodemon": "^1.18.7",
     "require.all": "^2.0.4",
     "semantic-release": "^17.0.7",
-    "@semantic-release/git": "^9.0.0",
-    "husky": "^4.2.5",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4"
+    "semantic-release-slack-bot": "^1.6.2"
   },
   "husky": {
     "hooks": {
