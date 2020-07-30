@@ -126,9 +126,13 @@ module.exports = {
             }
             return response
           } catch (e) {
-            // eslint-disable-next-line no-console
-            console.log(e)
-            throw Boom.boomify(e)
+            if (e.statusCode >= 400 && e.statusCode < 500) {
+              throw Boom.boomify(e, { statusCode: e.statusCode })
+            } else {
+              // eslint-disable-next-line no-console
+              console.log(e)
+              throw Boom.boomify(e)
+            }
           }
         },
       })
