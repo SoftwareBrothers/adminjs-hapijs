@@ -102,10 +102,19 @@ module.exports = {
     }
 
     routes.forEach((route) => {
+      const options = route.method === 'POST' ? {
+        auth: authStrategy,
+        payload: {
+          multipart: true,
+        }
+      } : {
+        auth: authStrategy,
+      }
+      
       server.route({
         method: route.method,
         path: `${admin.options.rootPath}${route.path}`,
-        options: { auth: authStrategy },
+        options,
         handler: async (request, h) => {
           try {
             const loggedInUser = request.auth && request.auth.credentials

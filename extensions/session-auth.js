@@ -22,10 +22,12 @@ const sessionAuth = async (server, adminBro) => {
   await server.register(HapiAuthCookie)
 
   server.auth.strategy(strategy, 'cookie', {
-    password: cookiePassword,
-    cookie: cookieName,
+    cookie: {
+      name: cookieName,
+      password: cookiePassword,
+      isSecure,
+    },
     redirectTo: loginPath,
-    isSecure,
     ...other,
   })
 
