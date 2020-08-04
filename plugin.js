@@ -1,7 +1,7 @@
 const path = require('path')
 const Boom = require('@hapi/boom')
 const inert = require('@hapi/inert')
-const AdminBro = require('@admin-bro/core')
+const AdminBro = require('admin-bro')
 const sessionAuth = require('./extensions/session-auth')
 const pkg = require('./package.json')
 
@@ -38,7 +38,7 @@ module.exports = {
    * @return {AdminBro}                               AdminBro instance
    * @function register
    * @static
-   * @memberof module:admin-bro-hapijs
+   * @memberof module:@admin-bro/hapi
    * @example
    * const AdminBroPlugin = require('@admin-bro/hapi')
    * const Hapi = require('hapi')
@@ -158,7 +158,7 @@ module.exports = {
   },
   /**
    * Renders login page by simply invoking {@link AdminBro.renderLogin}
-   * @memberof module:admin-bro-hapijs
+   * @memberof module:@admin-bro/hapi
    */
   renderLogin: async ({ action, errorMessage }) => (
     AdminBro.renderLogin({ action, errorMessage })

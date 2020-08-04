@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const mongoose = require('mongoose')
 
-const AdminBro = require('@admin-bro/core')
+const AdminBro = require('admin-bro')
 const AdminBroMongoose = require('@admin-bro/mongoose')
 const AdminBroPlugin = require('../index')
 
