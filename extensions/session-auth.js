@@ -1,4 +1,4 @@
-const HapiAuthCookie = require('hapi-auth-cookie')
+const HapiAuthCookie = require('@hapi/cookie')
 
 /**
  * Creates authentication logic for admin users
@@ -22,10 +22,12 @@ const sessionAuth = async (server, adminBro) => {
   await server.register(HapiAuthCookie)
 
   server.auth.strategy(strategy, 'cookie', {
-    password: cookiePassword,
-    cookie: cookieName,
+    cookie: {
+      name: cookieName,
+      password: cookiePassword,
+      isSecure,
+    },
     redirectTo: loginPath,
-    isSecure,
     ...other,
   })
 

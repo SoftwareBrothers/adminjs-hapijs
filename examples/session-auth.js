@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 
 const AdminBro = require('admin-bro')
-const AdminBroMongoose = require('admin-bro-mongoose')
+const AdminBroMongoose = require('@admin-bro/mongoose')
 const AdminModel = require('./mongoose/admin-model')
 const AdminBroPlugin = require('../index')
 
