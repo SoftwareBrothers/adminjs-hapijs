@@ -12,11 +12,11 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "adminjs": ">=3.0.0",
     "@hapi/boom": "^9.1.0",
     "@hapi/cookie": "^11.0.0",
     "@hapi/hapi": "^19.2.0",
-    "@hapi/inert": "^6.0.1"
+    "@hapi/inert": "^6.0.1",
+    "adminjs": ">=5.0.0"
   },
   "bugs": {
     "url": "https://github.com/SoftwareBrothers/adminjs-hapijs/issues"
@@ -33,13 +33,13 @@
     "admin-panel"
   ],
   "devDependencies": {
-    "adminjs": ">=3.0.0",
-    "@adminjs/mongoose": "^1.0.0",
+    "@adminjs/mongoose": "^2.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@hapi/boom": "^9.1.0",
     "@hapi/hapi": "^19.2.0",
     "@semantic-release/git": "^9.0.0",
+    "adminjs": "^5.0.0",
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
