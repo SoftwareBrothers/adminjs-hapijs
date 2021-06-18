@@ -2,12 +2,12 @@ const Hapi = require('hapi')
 const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 
-const AdminBro = require('admin-bro')
-const AdminBroMongoose = require('@admin-bro/mongoose')
+const AdminJS = require('adminjs')
+const AdminJSMongoose = require('@adminjs/mongoose')
 const AdminModel = require('./mongoose/admin-model')
-const AdminBroPlugin = require('../index')
+const AdminJSPlugin = require('../index')
 
-AdminBro.registerAdapter(AdminBroMongoose)
+AdminJS.registerAdapter(AdminJSMongoose)
 
 /**
  * Creates first admin test@example.com:password when there are no
@@ -30,7 +30,7 @@ const start = async () => {
 
     await createAdminIfNone()
 
-    const adminBroOptions = {
+    const adminJsOptions = {
       databases: [connection],
       branding: {
         companyName: 'Amazing c.o.',
@@ -47,8 +47,8 @@ const start = async () => {
       },
     }
     await server.register({
-      plugin: AdminBroPlugin,
-      options: adminBroOptions,
+      plugin: AdminJSPlugin,
+      options: adminJsOptions,
     })
 
     await server.start()

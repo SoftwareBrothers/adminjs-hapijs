@@ -1,22 +1,22 @@
-# Hapijs plugin for AdminBro
+# Hapijs plugin for AdminJS
 
-This is an official [AdminBro](https://github.com/SoftwareBrothers/admin-bro) plugin which integrates it to [hapijs](https://hapijs.com/) framework.
+This is an official [AdminJS](https://github.com/SoftwareBrothers/adminjs) plugin which integrates it to [hapijs](https://hapijs.com/) framework.
 
-## AdminBro
+## AdminJS
 
-AdminBro is an automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
+AdminJS is an automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
 
-Check out the example application with mongo and postgres models here: https://admin-bro-example-app.herokuapp.com/admin
+Check out the example application with mongo and postgres models here: https://adminjs-example-app.herokuapp.com/admin
 
-Or visit [AdminBro](https://github.com/SoftwareBrothers/admin-bro) github page.
+Or visit [AdminJS](https://github.com/SoftwareBrothers/adminjs) github page.
 
 ## Usage
 
-To see example usage visit the [Hapi section under AdminBro project page](https://softwarebrothers.github.io/admin-bro-dev/module-admin-bro-hapijs.html)
+To see example usage visit the [Hapi section under AdminJS project page](https://softwarebrothers.github.io/adminjs-dev/module-adminjs-hapijs.html)
 
 ## License
 
-AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
+AdminJS is Copyright © 2021 SoftwareBrothers.co. It is free software and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
 
 ## About SoftwareBrothers.co
 

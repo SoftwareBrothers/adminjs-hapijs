@@ -1,11 +1,11 @@
 /**
- * @module @admin-bro/hapi
+ * @module @adminjs/hapi
  * @description
  * 
  * ## Installation
  * 
  * ```sh
- * npm install @admin-bro/hapi @hapi/boom @hapi/inert
+ * npm install @adminjs/hapi @hapi/boom @hapi/inert
  * ```
  * 
  * Plugin depends on the following packages and they have to be installed beforehand:
@@ -22,18 +22,18 @@
  * The simplest example:
  *
  * ```javascript
- * const AdminBroPlugin = require('@admin-bro/hapi')
+ * const AdminJSPlugin = require('@adminjs/hapi')
  * const Hapi = require('hapi')
  *
- * const adminBroOptions = {
+ * const adminJsOptions = {
  *   resources: [YourResource],
  * }
  *
  * const server = Hapi.server({ port: process.env.PORT || 8080 })
  * const start = async () => {
  *   await server.register({
- *     plugin: AdminBroPlugin,
- *     options: adminBroOptions,
+ *     plugin: AdminJSPlugin,
+ *     options: adminJsOptions,
  *   })
  *
  *   await server.start()
@@ -49,7 +49,7 @@
  * 
  * ## Authentication options
  * 
- * Plugin receives all {@link AdminBroOptions} and one special parameter: `auth`, which controls the authentication.
+ * Plugin receives all {@link AdminJSOptions} and one special parameter: `auth`, which controls the authentication.
  * 
  * 1. By default, if you won't give `options.auth` - admin panel will be available without the authentication (like in the simplest example above)
  * 2. You can set whatever authentication you prefer for admin routes by setting `options.auth.strategy`. For example:
@@ -60,16 +60,16 @@
  * server.auth.strategy('simple', 'basic', { validate })
  * 
  * await server.register({
- *   plugin: AdminBroPlugin,
- *   options: { auth: { strategy: 'simple' }, ...otherAdminBroOptions },
+ *   plugin: AdminJSPlugin,
+ *   options: { auth: { strategy: 'simple' }, ...otherAdminJSOptions },
  * })
  * //...
  * ```
  * 
- * The strategy will be passed down to all AdminBro routes.
+ * The strategy will be passed down to all AdminJS routes.
  * 
- * 3. @admin-bro/hapi plugin can be setup to use [auth-cookie](https://github.com/hapijs/hapi-auth-cookie). 
- * Only thing you have to do is to define the following {@link module:@admin-bro/hapi.register auth options}: 
+ * 3. @adminjs/hapi plugin can be setup to use [auth-cookie](https://github.com/hapijs/hapi-auth-cookie). 
+ * Only thing you have to do is to define the following {@link module:@adminjs/hapi.register auth options}: 
  * _authenticate_, _cookiePassword_, _isSecure_, _cookieName_.
  */
 

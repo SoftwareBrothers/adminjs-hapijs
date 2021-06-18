@@ -1,11 +1,11 @@
 const Hapi = require('hapi')
 const mongoose = require('mongoose')
 
-const AdminBro = require('admin-bro')
-const AdminBroMongoose = require('@admin-bro/mongoose')
-const AdminBroPlugin = require('../index')
+const AdminJS = require('adminjs')
+const AdminJSMongoose = require('@adminjs/mongoose')
+const AdminJSPlugin = require('../index')
 
-AdminBro.registerAdapter(AdminBroMongoose)
+AdminJS.registerAdapter(AdminJSMongoose)
 
 // loading models definition
 require('./mongoose/admin-model')
@@ -16,7 +16,7 @@ const start = async () => {
     const server = Hapi.server({ port: process.env.PORT || 8080 })
     const connection = await mongoose.connect(process.env.MONGO_URL)
 
-    const adminBroOptions = {
+    const adminJsOptions = {
       databases: [connection],
       branding: {
         companyName: 'Amazing c.o.',
@@ -24,8 +24,8 @@ const start = async () => {
       rootPath: '/admin',
     }
     await server.register({
-      plugin: AdminBroPlugin,
-      options: adminBroOptions,
+      plugin: AdminJSPlugin,
+      options: adminJsOptions,
     })
 
     await server.start()
