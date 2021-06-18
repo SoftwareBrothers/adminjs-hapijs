@@ -1,7 +1,7 @@
 {
-  "name": "@admin-bro/hapi",
+  "name": "@adminjs/hapi",
   "version": "3.0.0",
-  "description": "This is an official AdminBro plugin which integrates it to hapijs framework.",
+  "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon examples/simple.js",
@@ -12,29 +12,29 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "admin-bro": ">=3.0.0",
+    "adminjs": ">=3.0.0",
     "@hapi/boom": "^9.1.0",
     "@hapi/cookie": "^11.0.0",
     "@hapi/hapi": "^19.2.0",
     "@hapi/inert": "^6.0.1"
   },
   "bugs": {
-    "url": "https://github.com/SoftwareBrothers/admin-bro-hapijs/issues"
+    "url": "https://github.com/SoftwareBrothers/adminjs-hapijs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SoftwareBrothers/admin-bro-hapijs.git"
+    "url": "git+https://github.com/SoftwareBrothers/adminjs-hapijs.git"
   },
-  "homepage": "https://github.com/SoftwareBrothers/admin-bro-hapijs#readme",
+  "homepage": "https://github.com/SoftwareBrothers/adminjs-hapijs#readme",
   "keywords": [
     "hapi",
     "admin",
-    "admin-bro",
+    "adminjs",
     "admin-panel"
   ],
   "devDependencies": {
-    "admin-bro": ">=3.0.0",
-    "@admin-bro/mongoose": "^1.0.0",
+    "adminjs": ">=3.0.0",
+    "@adminjs/mongoose": "^1.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@hapi/boom": "^9.1.0",

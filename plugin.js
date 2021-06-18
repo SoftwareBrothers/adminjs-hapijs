@@ -1,7 +1,7 @@
 const path = require('path')
 const Boom = require('@hapi/boom')
 const inert = require('@hapi/inert')
-const AdminBro = require('admin-bro')
+const AdminJS = require('adminjs')
 const sessionAuth = require('./extensions/session-auth')
 const pkg = require('./package.json')
 
@@ -19,7 +19,7 @@ module.exports = {
    * Options you give in Hapi are passed back to it.
    *
    * @param  {Object} server                          Hapi.js server
-   * @param  {Object} options                         options passed to AdminBro
+   * @param  {Object} options                         options passed to AdminJS
    * @param  {Object} options.auth                    Authentication options. You can pass here
    *                                                  options described below and any other option
    *                                                  supported by the https://github.com/hapijs/cookie
@@ -30,20 +30,20 @@ module.exports = {
    * @param  {Object} [options.auth.strategy]         auth strategy for hapi.js routes. By default,
    *                                                  set to none - all admin routes will be
    *                                                  available without authentication
-   * @param  {Object} [options.auth.cookieName=adminBro] When auth strategy is set to 'session',
+   * @param  {Object} [options.auth.cookieName=adminJs] When auth strategy is set to 'session',
    *                                                  this will be the name of the cookie
    * @param  {Object} [options.auth.cookiePassword]   cookie password for session strategy
    * @param  {Object} [options.auth.isSecure=false]   if cookie should be accessible only via HTTPS,
    *                                                  default to false
-   * @return {AdminBro}                               AdminBro instance
+   * @return {AdminJS}                               AdminJS instance
    * @function register
    * @static
-   * @memberof module:@admin-bro/hapi
+   * @memberof module:@adminjs/hapi
    * @example
-   * const AdminBroPlugin = require('@admin-bro/hapi')
+   * const AdminJSPlugin = require('@adminjs/hapi')
    * const Hapi = require('hapi')
    *
-   * // see AdminBro documentation on database setup.
+   * // see AdminJS documentation on database setup.
    * const yourDatabase = require('your-database-setup-file')
    *
    * const ADMIN = {
@@ -51,7 +51,7 @@ module.exports = {
    *   password: 'password',
    * }
    *
-   * const adminBroOptions = {
+   * const adminJsOptions = {
    *   resources: [yourDatabase],
    *
    *   auth: {
@@ -62,7 +62,7 @@ module.exports = {
    *       return null
    *     },
    *     strategy: 'session',
-   *     cookieName: 'adminBroCookie',
+   *     cookieName: 'adminJsCookie',
    *     cookiePassword: process.env.COOKIE_PASSWORD || 'makesurepasswordissecure',
    *     isSecure: true, //only https requests
    *   },
@@ -71,8 +71,8 @@ module.exports = {
    * const server = Hapi.server({ port: process.env.PORT || 8080 })
    * const start = async () => {
    *   await server.register({
-   *     plugin: AdminBroPlugin,
-   *     options: adminBroOptions,
+   *     plugin: AdminJSPlugin,
+   *     options: adminJsOptions,
    *   })
    *
    *   await server.start()
@@ -81,10 +81,10 @@ module.exports = {
    * start()
    */
   register: async (server, options) => {
-    const admin = new AdminBro(options)
+    const admin = new AdminJS(options)
     await admin.initialize()
     let authStrategy = options.auth && options.auth.strategy
-    const { routes, assets } = AdminBro.Router
+    const { routes, assets } = AdminJS.Router
 
     if (options.auth && options.auth.authenticate) {
       if (authStrategy && authStrategy !== 'session') {
@@ -157,10 +157,10 @@ module.exports = {
     return admin
   },
   /**
-   * Renders login page by simply invoking {@link AdminBro.renderLogin}
-   * @memberof module:@admin-bro/hapi
+   * Renders login page by simply invoking {@link AdminJS.renderLogin}
+   * @memberof module:@adminjs/hapi
    */
   renderLogin: async ({ action, errorMessage }) => (
-    AdminBro.renderLogin({ action, errorMessage })
+    AdminJS.renderLogin({ action, errorMessage })
   ),
 }

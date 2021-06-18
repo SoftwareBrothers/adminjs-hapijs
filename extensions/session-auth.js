@@ -3,11 +3,11 @@ const HapiAuthCookie = require('@hapi/cookie')
 /**
  * Creates authentication logic for admin users
  * @param  {Hapi} server            Hapi.js server instance
- * @param  {AdminBro} adminBro      adminBro instance
+ * @param  {AdminJS} adminJs      adminJs instance
  * @private
  */
-const sessionAuth = async (server, adminBro) => {
-  const { loginPath, logoutPath, rootPath } = adminBro.options
+const sessionAuth = async (server, adminJs) => {
+  const { loginPath, logoutPath, rootPath } = adminJs.options
   const {
     cookiePassword,
     authenticate,
@@ -16,7 +16,7 @@ const sessionAuth = async (server, adminBro) => {
     cookieName,
     strategy,
     ...other
-  } = adminBro.options.auth
+  } = adminJs.options.auth
 
   // example authentication is based on the cookie store
   await server.register(HapiAuthCookie)
@@ -51,12 +51,12 @@ const sessionAuth = async (server, adminBro) => {
           errorMessage = 'invalidCredentials'
         }
 
-        // AdminBro exposes function which renders login form for us.
+        // AdminJS exposes function which renders login form for us.
         // It takes 2 arguments:
         // - options.action (with login path)
         // - [errorMessage] optional error message - visible when user
         //                  gives wrong credentials
-        return adminBro.renderLogin({ action: loginPath, errorMessage })
+        return adminJs.renderLogin({ action: loginPath, errorMessage })
       } catch (e) {
         console.log(e)
         throw e
