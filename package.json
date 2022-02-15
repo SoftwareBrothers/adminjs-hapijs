@@ -7,7 +7,8 @@
     "dev": "nodemon examples/simple.js",
     "dev:auth": "nodemon examples/session-auth.js",
     "lint": "./node_modules/eslint/bin/eslint.js './extensions/**/*.js' './examples/**/*.js' './plugin.js'",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "build": "echo \"No build needed\""
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
