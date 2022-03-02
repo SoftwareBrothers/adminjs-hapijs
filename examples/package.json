@@ -1,0 +1,24 @@
+{
+  "name": "adminjs-hapi-examples",
+  "version": "1.0.0",
+  "description": "Examples for AdminJS Hapi plugin",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:simple": "ts-node src/simple",
+    "start:auth": "ts-node src/session-auth"
+  },
+  "dependencies": {
+    "@adminjs/mongoose": "^2.0.2",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/hapi": "^20.2.1",
+    "adminjs": "^5.7.2",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "ts-node": "^10.6.0"
+  }
+}

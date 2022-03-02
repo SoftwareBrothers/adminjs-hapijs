@@ -2,22 +2,22 @@
   "name": "@adminjs/hapi",
   "version": "4.0.1",
   "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "dev": "nodemon examples/simple.js",
-    "dev:auth": "nodemon examples/session-auth.js",
-    "lint": "./node_modules/eslint/bin/eslint.js './extensions/**/*.js' './examples/**/*.js' './plugin.js'",
+    "dev": "rm -rf lib && tsc --watch",
+    "lint": "eslint -c './.eslintrc.js' './src/**/*.ts' './examples/**/*.ts'",
     "release": "semantic-release",
-    "build": "echo \"No build needed\""
+    "build": "rm -rf lib && tsc"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "@hapi/boom": "^9.1.0",
-    "@hapi/cookie": "^11.0.0",
-    "@hapi/hapi": "^19.2.0",
-    "@hapi/inert": "^6.0.1",
-    "adminjs": ">=5.0.0"
+    "@hapi/boom": "^9.1.4",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/hapi": "^20.2.1",
+    "@hapi/inert": "^6.0.5",
+    "adminjs": "^5.7.2"
   },
   "bugs": {
     "url": "https://github.com/SoftwareBrothers/adminjs-hapijs/issues"
@@ -34,30 +34,33 @@
     "admin-panel"
   ],
   "devDependencies": {
-    "@adminjs/mongoose": "^2.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@hapi/boom": "^9.1.0",
-    "@hapi/hapi": "^19.2.0",
+    "@hapi/boom": "^9.1.4",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/hapi": "^20.2.1",
+    "@hapi/inert": "^6.0.5",
     "@semantic-release/git": "^9.0.0",
-    "adminjs": "^5.0.0",
-    "eslint": "^5.10.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "adminjs": "^5.7.2",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.2",
     "husky": "^4.2.5",
-    "mongoose": "^5.3.14",
     "nodemon": "^1.18.7",
+    "prettier": "^2.5.1",
     "require.all": "^2.0.4",
     "semantic-release": "^17.0.7",
-    "semantic-release-slack-bot": "^1.6.2"
+    "semantic-release-slack-bot": "^1.6.2",
+    "typescript": "^4.6.2"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  },
-  "dependencies": {
-    "@hapi/cookie": "^11.0.0",
-    "@hapi/inert": "^6.0.1"
   }
 }

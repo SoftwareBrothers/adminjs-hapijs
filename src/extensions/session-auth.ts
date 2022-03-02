@@ -1,25 +1,18 @@
-const HapiAuthCookie = require('@hapi/cookie')
+import HapiAuthCookie from '@hapi/cookie';
 
 /**
  * Creates authentication logic for admin users
  * @param  {Hapi} server            Hapi.js server instance
- * @param  {AdminJS} adminJs      adminJs instance
+ * @param  {AdminJS} adminJs        AdminJs instance
  * @private
  */
 const sessionAuth = async (server, adminJs) => {
-  const { loginPath, logoutPath, rootPath } = adminJs.options
-  const {
-    cookiePassword,
-    authenticate,
-    isSecure,
-    defaultMessage,
-    cookieName,
-    strategy,
-    ...other
-  } = adminJs.options.auth
+  const { loginPath, logoutPath, rootPath } = adminJs.options;
+  const { cookiePassword, authenticate, isSecure, defaultMessage, cookieName, strategy, ...other } =
+    adminJs.options.auth;
 
   // example authentication is based on the cookie store
-  await server.register(HapiAuthCookie)
+  await server.register(HapiAuthCookie);
 
   server.auth.strategy(strategy, 'cookie', {
     cookie: {
@@ -29,7 +22,7 @@ const sessionAuth = async (server, adminJs) => {
     },
     redirectTo: loginPath,
     ...other,
-  })
+  });
 
   server.route({
     method: ['POST', 'GET'],
@@ -40,15 +33,15 @@ const sessionAuth = async (server, adminJs) => {
     },
     handler: async (request, h) => {
       try {
-        let errorMessage = defaultMessage
+        let errorMessage = defaultMessage;
         if (request.method === 'post') {
-          const { email, password } = request.payload
-          const admin = await authenticate(email, password)
+          const { email, password } = request.payload;
+          const admin = await authenticate(email, password);
           if (admin) {
-            request.cookieAuth.set(admin)
-            return h.redirect(rootPath)
+            request.cookieAuth.set(admin);
+            return h.redirect(rootPath);
           }
-          errorMessage = 'invalidCredentials'
+          errorMessage = 'invalidCredentials';
         }
 
         // AdminJS exposes function which renders login form for us.
@@ -56,23 +49,23 @@ const sessionAuth = async (server, adminJs) => {
         // - options.action (with login path)
         // - [errorMessage] optional error message - visible when user
         //                  gives wrong credentials
-        return adminJs.renderLogin({ action: loginPath, errorMessage })
+        return adminJs.renderLogin({ action: loginPath, errorMessage });
       } catch (e) {
-        console.log(e)
-        throw e
+        console.log(e);
+        throw e;
       }
     },
-  })
+  });
 
   server.route({
     method: 'GET',
     path: logoutPath,
     options: { auth: false },
     handler: async (request, h) => {
-      request.cookieAuth.clear()
-      return h.redirect(loginPath)
+      request.cookieAuth.clear();
+      return h.redirect(loginPath);
     },
-  })
-}
+  });
+};
 
-module.exports = sessionAuth
+export default sessionAuth;
