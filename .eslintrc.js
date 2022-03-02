@@ -1,57 +1,26 @@
 module.exports = {
-    'env': {
-        'es6': true,
-        'node': true,
-        'mocha': true
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint/eslint-plugin"],
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
     },
-    'extends': 'airbnb-base',
-    'parserOptions': {
-        'ecmaVersion': 2018,
-        'sourceType': 'module'
+  },
+  rules: {
+    "prettier/prettier": "error",
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"]
+  },
+  ignorePatterns: ["node_modules", "lib", "types"],
+  settings: {
+    react: {
+      version: "detect",
     },
-    'rules': {
-        'indent': [
-            'error',
-            2
-        ],
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'never'
-        ],
-        'import/no-unresolved': 'off',
-        'no-underscore-dangle': 'off',
-        'guard-for-in': 'off',
-        'no-restricted-syntax': 'off',
-        'no-await-in-loop': 'off',
-    },
-    overrides: [
-        {
-          files: ['*-test.js', '*.spec.js'],
-          rules: {
-            'no-unused-expressions': 'off',
-            'func-names': 'off',
-            'prefer-arrow-callback': 'off'
-          }
-        },
-        {
-          files: ["examples/**/*.js"],
-          rules: {
-            'import/no-extraneous-dependencies': 'off'
-          }
-        }
-    ],
-    globals: {
-        'expect': true,
-        'factory': true,
-        'sandbox': true,
-        'User': true
-    }
-}
+  },
+};

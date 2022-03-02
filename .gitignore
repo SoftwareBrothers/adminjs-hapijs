@@ -4,3 +4,5 @@ coverage
 .DS_store
 docker-compose.ovverride.yml
 *.log
+lib
+examples/.adminjs

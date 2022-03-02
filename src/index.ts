@@ -25,7 +25,7 @@
  *
  * ```javascript
  * const AdminJSPlugin = require('@adminjs/hapi')
- * const Hapi = require('hapi')
+ * const Hapi = require('@hapi/hapi')
  *
  * const adminJsOptions = {
  *   resources: [YourResource],
@@ -75,6 +75,13 @@
  * _authenticate_, _cookiePassword_, _isSecure_, _cookieName_.
  */
 
-const Plugin = require('./plugin')
+import { register } from './plugin';
+import pkg from '../package.json';
 
-module.exports = Plugin
+const AdminJSHapi = {
+  name: pkg.name,
+  version: pkg.version,
+  register,
+};
+
+export default AdminJSHapi;

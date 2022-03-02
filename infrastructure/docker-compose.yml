@@ -1,24 +1,5 @@
 version: "2.1"
 services:
-  admin-hapi-app:
-    container_name: admin-hapi-app
-    restart: always
-    build: 
-      context: ../
-      dockerfile: ./infrastructure/Dockerfile
-    ports:
-      - "8080:8080"
-    links:
-      - admin-hapi-mongo
-    volumes:
-      - ../:/usr/src/app
-      - /usr/src/app/node_modules
-    command: "npm run session-auth"
-    env_file: '.env'
-    depends_on:
-      admin-hapi-mongo:
-        condition: service_healthy
-
   admin-hapi-mongo:
     container_name: admin-hapi-mongo
     image: mongo
