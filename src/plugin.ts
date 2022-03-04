@@ -5,6 +5,10 @@ import Hapi from '@hapi/hapi';
 import AdminJS, { AdminJSOptions, Router as AdminRouter } from 'adminjs';
 import sessionAuth from './extensions/session-auth';
 
+// 'require' prevents typescript from nesting 'src' folder in 'lib' ('lib/src')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../package.json');
+
 /**
  * Plugin definition for Hapi.js framework.
  * @private
@@ -48,7 +52,8 @@ export type ExtendedAdminJSOptions = AdminJSOptions & {
    * supported by https://github.com/hapijs/cookie
    */
   auth: AuthOptions;
-}
+};
+
 /**
  * Actual method that Hapi uses under the hood when you call
  * server.register(plugin, options) method.
@@ -95,7 +100,7 @@ export type ExtendedAdminJSOptions = AdminJSOptions & {
  *
  * start()
  */
-export const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
+const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
   const { registerInert = true } = options;
   const { routes, assets } = AdminRouter;
 
@@ -180,3 +185,11 @@ export const register = async (server: Hapi, options: ExtendedAdminJSOptions) =>
 
   return admin;
 };
+
+const AdminJSHapi = {
+  name: pkg.name,
+  version: pkg.version,
+  register,
+};
+
+export default AdminJSHapi;

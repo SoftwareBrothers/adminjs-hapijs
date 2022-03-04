@@ -75,14 +75,7 @@
  * _authenticate_, _cookiePassword_, _isSecure_, _cookieName_.
  */
 
-import { register } from './plugin';
+import AdminJSHapi from './plugin';
 export { ExtendedAdminJSOptions, AuthOptions } from './plugin';
-import pkg from '../package.json';
-
-const AdminJSHapi = {
-  name: pkg.name,
-  version: pkg.version,
-  register,
-};
 
 export default AdminJSHapi;
