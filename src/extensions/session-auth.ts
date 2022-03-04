@@ -9,15 +9,7 @@ import HapiAuthCookie from '@hapi/cookie';
 const sessionAuth = async (server: Hapi, adminJs: AdminJS) => {
   const options = adminJs.options as ExtendedAdminJSOptions;
   const { loginPath, logoutPath, rootPath } = options;
-  const {
-    cookiePassword,
-    authenticate,
-    isSecure,
-    defaultMessage,
-    cookieName,
-    strategy,
-    ...other
-  } = options.auth;
+  const { cookiePassword, authenticate, isSecure, defaultMessage, cookieName, strategy, ...other } = options.auth;
 
   // example authentication is based on the cookie store
   await server.register(HapiAuthCookie);
