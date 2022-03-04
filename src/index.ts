@@ -76,6 +76,7 @@
  */
 
 import { register } from './plugin';
+export { ExtendedAdminJSOptions, AuthOptions } from './plugin';
 import pkg from '../package.json';
 
 const AdminJSHapi = {

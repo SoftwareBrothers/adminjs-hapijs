@@ -1,7 +1,8 @@
 import path from 'path';
 import Boom from '@hapi/boom';
 import inert from '@hapi/inert';
-import AdminJS, { Router as AdminRouter } from 'adminjs';
+import Hapi from '@hapi/hapi';
+import AdminJS, { AdminJSOptions, Router as AdminRouter } from 'adminjs';
 import sessionAuth from './extensions/session-auth';
 
 /**
@@ -9,31 +10,50 @@ import sessionAuth from './extensions/session-auth';
  * @private
  */
 
+export type AuthOptions = {
+  /**
+   * Function takes email and password as argument. Should return a logged-in user object or null/false.
+   * If provided, the strategy is set to 'session'.
+   */
+  authenticate?: (email: string, password: string) => Promise<Record<string, any>> | null | false;
+  /**
+   * Auth strategy for Hapi routes.
+   */
+  strategy?: string;
+  /**
+   * This is the name of the cookie if strategy is set to 'session'.
+   */
+  cookieName?: string;
+  /**
+   * Cookie password for 'session' strategy.
+   */
+  cookiePassword?: string;
+  /**
+   * If cookie should be accessible only via https, defaults to false
+   */
+  isSecure: boolean;
+  /**
+   * Cookie options: https://github.com/hapijs/cookie
+   */
+  [key: string]: any;
+};
+
+export type ExtendedAdminJSOptions = AdminJSOptions & {
+  /**
+   * Should 'inert' be registered by the plugin. Defaults to true. If disabled, you snould register it yourself.
+   */
+  registerInert: boolean;
+  /**
+   * Authentication options. You can pass here options specified below and any other option
+   * supported by https://github.com/hapijs/cookie
+   */
+  auth: AuthOptions;
+}
 /**
  * Actual method that Hapi uses under the hood when you call
  * server.register(plugin, options) method.
  * Options you give in Hapi are passed back to it.
  *
- * @param  {Object} server                          Hapi.js server
- * @param  {Object} options                         options passed to AdminJS
- * @param  {Object} options.auth                    Authentication options. You can pass here
- *                                                  options described below and any other option
- *                                                  supported by the https://github.com/hapijs/cookie
- * @param  {Object} [options.auth.authenticate]     function takes email and password
- *                                                  as arguments. Should return a logged in
- *                                                  user or null (no authorization), if given
- *                                                  options.auth.strategy is set to 'session'
- * @param  {Object} [options.auth.strategy]         auth strategy for hapi.js routes. By default,
- *                                                  set to none - all admin routes will be
- *                                                  available without authentication
- * @param  {Object} [options.auth.cookieName=adminJs] When auth strategy is set to 'session',
- *                                                  this will be the name of the cookie
- * @param  {Object} [options.auth.cookiePassword]   cookie password for session strategy
- * @param  {Object} [options.auth.isSecure=false]   if cookie should be accessible only via HTTPS,
- *                                                  default to false
- * @return {AdminJS}                               AdminJS instance
- * @function register
- * @static
  * @memberof module:@adminjs/hapi
  * @example
  * const AdminJSPlugin = require('@adminjs/hapi')
@@ -75,24 +95,27 @@ import sessionAuth from './extensions/session-auth';
  *
  * start()
  */
-export const register = async (server, options) => {
-  const admin = new AdminJS(options);
-  await admin.initialize();
-  let authStrategy = options.auth && options.auth.strategy;
+export const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
+  const { registerInert = true } = options;
   const { routes, assets } = AdminRouter;
 
-  if (options.auth && options.auth.authenticate) {
-    if (authStrategy && authStrategy !== 'session') {
+  if (options.auth?.authenticate) {
+    if (options.auth.strategy && options.auth.strategy !== 'session') {
       throw new Error(`When you give auth.authenticate as a parameter, auth strategy is set to 'session'.
                        Please remove auth.strategy from authentication parameters.
                       `);
     }
-    authStrategy = 'session';
+    options.auth.strategy = 'session';
 
     if (!options.auth.cookiePassword) {
       throw new Error('You have to give auth.cookiePassword parameter if you want to use authenticate function.');
     }
+  }
 
+  const admin = new AdminJS(options);
+  await admin.initialize();
+
+  if (options.auth?.authenticate) {
     await sessionAuth(server, admin);
   }
 
@@ -100,14 +123,14 @@ export const register = async (server, options) => {
     const opts =
       route.method === 'POST'
         ? {
-            auth: authStrategy,
+            auth: options.auth?.strategy,
             payload: {
               allow: 'multipart/form-data',
               multipart: { output: 'stream' },
             },
           }
         : {
-            auth: authStrategy,
+            auth: options.auth?.strategy,
           };
 
     server.route({
@@ -137,7 +160,9 @@ export const register = async (server, options) => {
     });
   });
 
-  await server.register(inert);
+  if (registerInert && inert) {
+    await server.register(inert);
+  }
 
   assets.forEach((asset) => {
     server.route({

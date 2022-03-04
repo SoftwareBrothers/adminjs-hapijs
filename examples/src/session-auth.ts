@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.join(__dirname + './../../infrastructure/.env') });
 import Hapi from '@hapi/hapi';
+import inert from '@hapi/inert';
 import mongoose from 'mongoose';
 import Bcrypt from 'bcrypt';
 import AdminJS from 'adminjs';
@@ -38,17 +39,18 @@ const start = async () => {
         companyName: 'Amazing c.o.',
       },
       rootPath: '/admin',
+      registerInert: false,
       auth: {
         authenticate: async (email, password) => {
           const admin = await AdminModel.findOne({ email });
           const isValid = admin && (await Bcrypt.compare(password, admin.password));
           return isValid && admin;
         },
-        strategy: 'session',
         cookiePassword: process.env.ADMIN_COOKIE_SECRET || 'yoursupersecretcookiepassword-veryveryverylong',
         isSecure: false, // allows you to test the app with http
       },
     };
+    await server.register(inert);
     await server.register({
       plugin: AdminJSPlugin,
       options: adminJsOptions,

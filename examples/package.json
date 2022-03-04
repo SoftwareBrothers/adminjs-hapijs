@@ -12,6 +12,7 @@
     "@adminjs/mongoose": "^2.0.2",
     "@hapi/cookie": "^11.0.2",
     "@hapi/hapi": "^20.2.1",
+    "@hapi/inert": "^6.0.5",
     "adminjs": "^5.7.2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",

@@ -19,6 +19,11 @@
     "@hapi/inert": "^6.0.5",
     "adminjs": "^5.7.2"
   },
+  "peerDependenciesMeta": {
+    "@hapi/inert": {
+      "optional": true
+    }
+  },
   "bugs": {
     "url": "https://github.com/SoftwareBrothers/adminjs-hapijs/issues"
   },
