@@ -8,7 +8,8 @@
     "dev": "rm -rf lib && tsc --watch",
     "lint": "eslint -c './.eslintrc.js' './src/**/*.ts' './examples/**/*.ts'",
     "release": "semantic-release",
-    "build": "rm -rf lib && tsc"
+    "build": "rm -rf lib && tsc",
+    "postversion": "node bin/update-info"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
