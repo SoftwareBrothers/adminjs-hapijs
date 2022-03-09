@@ -1,6 +1,6 @@
 {
   "name": "@adminjs/hapi",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
