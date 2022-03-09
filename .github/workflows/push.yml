@@ -71,6 +71,8 @@ jobs:
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
+      - name: Build
+        run: yarn build
       - name: Release
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
