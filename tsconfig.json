@@ -17,8 +17,7 @@
     "strictBindCallApply": true,
     "noImplicitThis": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "typeRoots": ["./node_modules/@types"]
+    "baseUrl": "./"
   },
   "exclude": ["lib", "types", "test", "examples"]
 }
