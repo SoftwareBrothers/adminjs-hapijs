@@ -18,7 +18,7 @@
     "@hapi/cookie": "^11.0.2",
     "@hapi/hapi": "^20.2.1",
     "@hapi/inert": "^6.0.5",
-    "adminjs": "^5.7.2"
+    "adminjs": ">=6.0.0"
   },
   "peerDependenciesMeta": {
     "@hapi/inert": {
@@ -50,7 +50,7 @@
     "@types/node": "^16.11.26",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
-    "adminjs": "^5.7.2",
+    "adminjs": "^6.0.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.4.0",
