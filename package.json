@@ -64,7 +64,7 @@
     "nodemon": "^1.18.7",
     "prettier": "^2.5.1",
     "require.all": "^2.0.4",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^19.0.3",
     "semantic-release-slack-bot": "^1.6.2",
     "typescript": "^4.6.2"
   },
