@@ -1,15 +1,32 @@
-import { ExtendedAdminJSOptions } from './../plugin';
 import AdminJS from 'adminjs';
 import Hapi from '@hapi/hapi';
 import HapiAuthCookie from '@hapi/cookie';
+import { ExtendedAdminJSOptionsWithDefault } from './../plugin';
+
+interface AuthRequestPayload {
+  email: string;
+  password: string;
+}
 
 /**
  * Creates authentication logic for admin users
  */
-const sessionAuth = async (server: Hapi, adminJs: AdminJS) => {
-  const options = adminJs.options as ExtendedAdminJSOptions;
+const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
+  const options = adminJs.options as ExtendedAdminJSOptionsWithDefault;
   const { loginPath, logoutPath, rootPath } = options;
-  const { cookiePassword, authenticate, isSecure, defaultMessage, cookieName, strategy, ...other } = options.auth;
+  const {
+    cookiePassword,
+    authenticate,
+    isSecure,
+    defaultMessage,
+    cookieName,
+    strategy = 'simple',
+    ...other
+  } = options.auth;
+
+  if (!authenticate) {
+    throw new Error('"authenticate" function must be provided for authenticated access');
+  }
 
   // example authentication is based on the cookie store
   await server.register(HapiAuthCookie);
@@ -35,8 +52,8 @@ const sessionAuth = async (server: Hapi, adminJs: AdminJS) => {
       try {
         let errorMessage = defaultMessage;
         if (request.method === 'post') {
-          const { email, password } = request.payload;
-          const admin = await authenticate!(email, password);
+          const { email, password } = request.payload as AuthRequestPayload;
+          const admin = await authenticate(email, password);
           if (admin) {
             request.cookieAuth.set(admin);
             return h.redirect(rootPath);

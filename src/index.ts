@@ -74,7 +74,6 @@
  * Only thing you have to do is to define the following {@link module:@adminjs/hapi.register auth options}:
  * _authenticate_, _cookiePassword_, _isSecure_, _cookieName_.
  */
-
 import AdminJSHapi from './plugin';
 export { ExtendedAdminJSOptions, AuthOptions } from './plugin';
 

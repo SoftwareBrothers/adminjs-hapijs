@@ -1,8 +1,8 @@
 import path from 'path';
 import Boom from '@hapi/boom';
 import inert from '@hapi/inert';
-import Hapi from '@hapi/hapi';
-import AdminJS, { AdminJSOptions, Router as AdminRouter } from 'adminjs';
+import Hapi, { Plugin, RouteOptions } from '@hapi/hapi';
+import AdminJS, { AdminJSOptions, AdminJSOptionsWithDefault, Router as AdminRouter } from 'adminjs';
 import sessionAuth from './extensions/session-auth';
 import info from './info';
 
@@ -11,12 +11,13 @@ import info from './info';
  * @private
  */
 
+export type AuthenticateResult = Promise<Record<string, unknown> | null | false> | null | false;
 export type AuthOptions = {
   /**
    * Function takes email and password as argument. Should return a logged-in user object or null/false.
    * If provided, the strategy is set to 'session'.
    */
-  authenticate?: (email: string, password: string) => Promise<Record<string, any>> | null | false;
+  authenticate?: (email: string, password: string) => AuthenticateResult;
   /**
    * Auth strategy for Hapi routes.
    */
@@ -36,7 +37,7 @@ export type AuthOptions = {
   /**
    * Cookie options: https://github.com/hapijs/cookie
    */
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type ExtendedAdminJSOptions = AdminJSOptions & {
@@ -50,6 +51,8 @@ export type ExtendedAdminJSOptions = AdminJSOptions & {
    */
   auth: AuthOptions;
 };
+
+export type ExtendedAdminJSOptionsWithDefault = AdminJSOptionsWithDefault & ExtendedAdminJSOptions;
 
 /**
  * Actual method that Hapi uses under the hood when you call
@@ -97,7 +100,7 @@ export type ExtendedAdminJSOptions = AdminJSOptions & {
  *
  * start()
  */
-const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
+const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) => {
   const { registerInert = true } = options;
   const { routes, assets } = AdminRouter;
 
@@ -122,7 +125,7 @@ const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
   }
 
   routes.forEach((route) => {
-    const opts =
+    const opts: RouteOptions =
       route.method === 'POST'
         ? {
             auth: options.auth?.strategy,
@@ -180,10 +183,12 @@ const register = async (server: Hapi, options: ExtendedAdminJSOptions) => {
     });
   });
 
-  return admin;
+  // Note: Returning AdminJS as any because `register` is typed to return `Promise<void>` but
+  // we might need to access created AdminJS instance outside of the plugin
+  return admin as any;
 };
 
-const AdminJSHapi = {
+const AdminJSHapi: Plugin<ExtendedAdminJSOptions> = {
   name: info?.name ?? '@adminjs/hapi',
   version: info?.version ?? 5,
   register,
