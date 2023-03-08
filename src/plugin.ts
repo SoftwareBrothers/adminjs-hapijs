@@ -1,10 +1,10 @@
-import path from 'path';
 import Boom from '@hapi/boom';
-import inert from '@hapi/inert';
 import Hapi, { Plugin, RouteOptions } from '@hapi/hapi';
+import inert from '@hapi/inert';
 import AdminJS, { AdminJSOptions, AdminJSOptionsWithDefault, Router as AdminRouter } from 'adminjs';
-import sessionAuth from './extensions/session-auth';
-import info from './info';
+import path from 'path';
+import sessionAuth from './extensions/session-auth.js';
+import info from './info.js';
 
 /**
  * Plugin definition for Hapi.js framework.
@@ -128,15 +128,15 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
     const opts: RouteOptions =
       route.method === 'POST'
         ? {
-            auth: options.auth?.strategy,
-            payload: {
-              allow: 'multipart/form-data',
-              multipart: { output: 'stream' },
-            },
-          }
+          auth: options.auth?.strategy,
+          payload: {
+            allow: 'multipart/form-data',
+            multipart: { output: 'stream' },
+          },
+        }
         : {
-            auth: options.auth?.strategy,
-          };
+          auth: options.auth?.strategy,
+        };
 
     server.route({
       method: route.method,

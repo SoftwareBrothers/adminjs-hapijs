@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "sourceMap": true,
     "outDir": "lib",
     "esModuleInterop": true,
@@ -16,7 +15,8 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "baseUrl": "./"
   },
   "exclude": ["lib", "types", "test", "examples"]
