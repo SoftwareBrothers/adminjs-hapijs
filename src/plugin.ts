@@ -128,15 +128,15 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
     const opts: RouteOptions =
       route.method === 'POST'
         ? {
-          auth: options.auth?.strategy,
-          payload: {
-            allow: 'multipart/form-data',
-            multipart: { output: 'stream' },
-          },
-        }
+            auth: options.auth?.strategy,
+            payload: {
+              allow: 'multipart/form-data',
+              multipart: { output: 'stream' },
+            },
+          }
         : {
-          auth: options.auth?.strategy,
-        };
+            auth: options.auth?.strategy,
+          };
 
     server.route({
       method: route.method,

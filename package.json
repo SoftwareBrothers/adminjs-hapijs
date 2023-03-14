@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "rm -rf lib && tsc --watch",
-    "lint": "eslint -c './.eslintrc.js' './src/**/*.ts' './examples/**/*.ts'",
+    "lint": "eslint -c './.eslintrc.cjs' './src/**/*.ts' './examples/**/*.ts'",
     "release": "semantic-release",
     "build": "rm -rf lib && tsc",
     "postversion": "node bin/update-info"
@@ -59,7 +59,7 @@
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "adminjs": "^6.0.0",
-    "eslint": "^8.10.0",
+    "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.25.4",
@@ -67,7 +67,7 @@
     "eslint-plugin-react": "^7.29.2",
     "husky": "^4.2.5",
     "nodemon": "^1.18.7",
-    "prettier": "^2.5.1",
+    "prettier": "^2.8.4",
     "require.all": "^2.0.4",
     "semantic-release": "^17.0.7",
     "semantic-release-slack-bot": "^1.6.2",
