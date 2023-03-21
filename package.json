@@ -52,7 +52,6 @@
     "@hapi/inert": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
     "@types/hapi__cookie": "^12.0.2",
-    "@types/hapi__hapi": "^21.0.0",
     "@types/hapi__inert": "^5.2.6",
     "@types/node": "^18.15.5",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
