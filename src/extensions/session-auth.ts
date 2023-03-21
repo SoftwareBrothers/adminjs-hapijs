@@ -47,7 +47,7 @@ const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
     path: loginPath,
     options: {
       auth: { mode: 'try', strategy: 'session' },
-      plugins: { 'hapi-auth-cookie': { redirectTo: false } },
+      plugins: { cookie: { redirectTo: false } },
     },
     handler: async (request, h) => {
       try {
