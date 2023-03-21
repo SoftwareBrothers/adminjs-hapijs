@@ -1,7 +1,8 @@
 import HapiAuthCookie from '@hapi/cookie';
 import Hapi from '@hapi/hapi';
 import AdminJS from 'adminjs';
-import { ExtendedAdminJSOptionsWithDefault } from './../plugin.js';
+
+import { ExtendedAdminJSOptionsWithDefault } from '../plugin.js';
 
 interface AuthRequestPayload {
   email: string;

@@ -5,24 +5,23 @@
   "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
   "exports": {
     ".": {
-      "import": "./build/index.js",
-      "types": "./types/index.d.ts"
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
     }
   },
   "scripts": {
     "dev": "rm -rf lib && tsc --watch",
-    "lint": "eslint -c './.eslintrc.cjs' './src/**/*.ts' './examples/**/*.ts'",
+    "lint": "eslint -c './.eslintrc.cjs' './src/**/*.ts'",
     "release": "semantic-release",
-    "build": "rm -rf lib && tsc",
-    "postversion": "node bin/update-info"
+    "build": "rm -rf lib && tsc"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "@hapi/boom": "^9.1.4",
-    "@hapi/cookie": "^11.0.2",
-    "@hapi/hapi": "^20.2.1",
-    "@hapi/inert": "^6.0.5",
+    "@hapi/boom": "^10.0.1",
+    "@hapi/cookie": "^12.0.1",
+    "@hapi/hapi": "^21.3.0",
+    "@hapi/inert": "^7.1.0",
     "adminjs": ">=6.0.0"
   },
   "peerDependenciesMeta": {
@@ -45,32 +44,30 @@
     "admin-panel"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@hapi/boom": "^9.1.4",
-    "@hapi/cookie": "^11.0.2",
-    "@hapi/hapi": "^20.2.1",
-    "@hapi/inert": "^6.0.5",
-    "@semantic-release/git": "^9.0.0",
-    "@types/hapi__cookie": "^10.1.4",
-    "@types/hapi__hapi": "^20.0.12",
-    "@types/hapi__inert": "^5.2.3",
-    "@types/node": "^16.11.26",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@hapi/boom": "^10.0.1",
+    "@hapi/cookie": "^12.0.1",
+    "@hapi/hapi": "^21.3.0",
+    "@hapi/inert": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@types/hapi__cookie": "^12.0.2",
+    "@types/hapi__hapi": "^21.0.0",
+    "@types/hapi__inert": "^5.2.6",
+    "@types/node": "^18.15.5",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "adminjs": "^6.0.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.29.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "husky": "^4.2.5",
-    "nodemon": "^1.18.7",
-    "prettier": "^2.8.4",
-    "require.all": "^2.0.4",
-    "semantic-release": "^17.0.7",
-    "semantic-release-slack-bot": "^1.6.2",
+    "prettier": "^2.8.6",
+    "semantic-release": "^20.1.3",
+    "semantic-release-slack-bot": "^4.0.0",
     "typescript": "^4.9.5"
   },
   "husky": {
@@ -79,6 +76,6 @@
     }
   },
   "dependencies": {
-    "tslib": "^2.4.0"
+    "tslib": "^2.5.0"
   }
 }

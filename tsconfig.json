@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "target": "es2017",
+    "target": "esnext",
     "jsx": "preserve",
     "importHelpers": true,
     "skipLibCheck": true,
