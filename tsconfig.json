@@ -19,5 +19,8 @@
     "module": "nodenext",
     "baseUrl": "./"
   },
+  "include": [
+    "./src/**/*.ts"
+  ],
   "exclude": ["lib", "types", "test", "examples"]
 }
