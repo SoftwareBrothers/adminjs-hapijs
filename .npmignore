@@ -1,0 +1,9 @@
+\.idea/
+node_modules/
+spec/
+test/
+example-app/
+src/
+package-lock\.json
+*.db
+*.log

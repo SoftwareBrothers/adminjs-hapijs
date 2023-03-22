@@ -13,7 +13,8 @@
     "dev": "rm -rf lib && tsc --watch",
     "lint": "eslint -c './.eslintrc.cjs' './src/**/*.ts'",
     "release": "semantic-release",
-    "build": "rm -rf lib && tsc"
+    "clean": "rm -rf lib",
+    "build": "tsc"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
