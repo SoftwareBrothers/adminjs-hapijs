@@ -14,10 +14,10 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "peerDependencies": {
-    "@hapi/boom": "^9.1.4",
-    "@hapi/cookie": "^11.0.2",
-    "@hapi/hapi": "^20.2.1",
-    "@hapi/inert": "^6.0.5",
+    "@hapi/boom": "^9.1.4 || ^10.0.0",
+    "@hapi/cookie": "^11.0.2 || ^12.0.0",
+    "@hapi/hapi": "^20.2.1 || ^21.0.0",
+    "@hapi/inert": "^6.0.5 || ^7.0.0",
     "adminjs": ">=6.0.0"
   },
   "peerDependenciesMeta": {
