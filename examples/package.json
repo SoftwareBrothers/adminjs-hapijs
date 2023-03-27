@@ -16,7 +16,7 @@
     "adminjs": "^5.7.2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
-    "mongoose": "^6.2.4"
+    "mongoose": "^6.4.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
