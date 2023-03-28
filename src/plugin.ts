@@ -127,7 +127,7 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
   const resolveAuthOption = (route) => {
     if (route.action === 'bundleComponents') return false;
     return options.auth?.strategy;
-  }
+  };
 
   routes.forEach((route) => {
     const auth = resolveAuthOption(route);
