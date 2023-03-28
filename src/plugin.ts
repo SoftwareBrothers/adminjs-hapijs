@@ -124,18 +124,24 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
     await sessionAuth(server, admin);
   }
 
+  const resolveAuthOption = (route) => {
+    if (route.action === 'bundleComponents') return false;
+    return options.auth?.strategy;
+  }
+
   routes.forEach((route) => {
+    const auth = resolveAuthOption(route);
     const opts: RouteOptions =
       route.method === 'POST'
         ? {
-            auth: options.auth?.strategy,
+            auth,
             payload: {
               allow: 'multipart/form-data',
               multipart: { output: 'stream' },
             },
           }
         : {
-            auth: options.auth?.strategy,
+            auth,
           };
 
     server.route({
