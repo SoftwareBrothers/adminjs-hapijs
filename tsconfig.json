@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "lib",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "target": "es2017",
+    "target": "esnext",
     "jsx": "preserve",
     "importHelpers": true,
     "skipLibCheck": true,
@@ -16,8 +15,12 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "baseUrl": "./"
   },
+  "include": [
+    "./src/**/*.ts"
+  ],
   "exclude": ["lib", "types", "test", "examples"]
 }

@@ -1,7 +1,8 @@
-import AdminJS from 'adminjs';
-import Hapi from '@hapi/hapi';
 import HapiAuthCookie from '@hapi/cookie';
-import { ExtendedAdminJSOptionsWithDefault } from './../plugin';
+import Hapi from '@hapi/hapi';
+import AdminJS from 'adminjs';
+
+import { ExtendedAdminJSOptionsWithDefault } from '../plugin.js';
 
 interface AuthRequestPayload {
   email: string;
@@ -46,7 +47,7 @@ const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
     path: loginPath,
     options: {
       auth: { mode: 'try', strategy: 'session' },
-      plugins: { 'hapi-auth-cookie': { redirectTo: false } },
+      plugins: { cookie: { redirectTo: false } },
     },
     handler: async (request, h) => {
       try {
