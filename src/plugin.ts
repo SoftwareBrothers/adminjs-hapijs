@@ -130,24 +130,10 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
   };
 
   routes.forEach((route) => {
-    const auth = resolveAuthOption(route);
-    const opts: RouteOptions =
-      route.method === 'POST'
-        ? {
-            auth,
-            payload: {
-              allow: 'multipart/form-data',
-              multipart: { output: 'stream' },
-            },
-          }
-        : {
-            auth,
-          };
-
     server.route({
       method: route.method,
       path: `${admin.options.rootPath}${route.path}`,
-      options: opts,
+      options: { auth: resolveAuthOption(route) },
       handler: async (request, h) => {
         try {
           const loggedInUser = request.auth?.credentials?.[0];
