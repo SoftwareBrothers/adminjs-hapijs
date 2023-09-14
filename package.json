@@ -1,6 +1,6 @@
 {
   "name": "@1024pix/adminjs-hapijs",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "type": "module",
   "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
   "exports": {
