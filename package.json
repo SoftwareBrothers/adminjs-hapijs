@@ -1,5 +1,5 @@
 {
-  "name": "@adminjs/hapi",
+  "name": "@1024pix/adminjs-hapijs",
   "version": "7.0.0",
   "type": "module",
   "description": "This is an official AdminJS plugin which integrates it with hapijs framework.",
