@@ -150,7 +150,9 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
       options: opts,
       handler: async (request, h) => {
         try {
-          const loggedInUser = request.auth?.credentials;
+          const loggedInUser = Array.isArray(request.auth?.credentials)
+            ? request.auth?.credentials?.[0]
+            : request.auth?.credentials;
           const controller = new route.Controller({ admin }, loggedInUser);
           const ret = await controller[route.action](request, h);
           const response = h.response(ret);
