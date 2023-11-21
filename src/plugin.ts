@@ -1,10 +1,14 @@
 import Boom from '@hapi/boom';
 import Hapi, { Plugin, RouteOptions } from '@hapi/hapi';
 import inert from '@hapi/inert';
-import AdminJS, { AdminJSOptions, AdminJSOptionsWithDefault, Router as AdminRouter } from 'adminjs';
+import AdminJS, { AdminJSOptions, AdminJSOptionsWithDefault, Router as AdminRouter, BaseAuthProvider } from 'adminjs';
 import path from 'path';
 import sessionAuth from './extensions/session-auth.js';
 import info from './info.js';
+
+const MISSING_AUTH_CONFIG_ERROR = 'You must configure either "authenticate" method or assign an auth "provider"';
+const INVALID_AUTH_CONFIG_ERROR =
+  'You cannot configure both "authenticate" and "provider". "authenticate" will be removed in next major release.';
 
 /**
  * Plugin definition for Hapi.js framework.
@@ -12,12 +16,20 @@ import info from './info.js';
  */
 
 export type AuthenticateResult = Promise<Record<string, unknown> | null | false> | null | false;
+export type AuthenticationContext = {
+  request: Hapi.Request;
+  h: Hapi.ResponseToolkit;
+};
 export type AuthOptions = {
   /**
    * Function takes email and password as argument. Should return a logged-in user object or null/false.
    * If provided, the strategy is set to 'session'.
    */
-  authenticate?: (email: string, password: string) => AuthenticateResult;
+  authenticate?: (email: string, password: string, context?: AuthenticationContext) => AuthenticateResult;
+  /**
+   * Auth Provider
+   */
+  provider?: BaseAuthProvider;
   /**
    * Auth strategy for Hapi routes.
    */
@@ -104,23 +116,40 @@ const register = async (server: Hapi.Server, options: ExtendedAdminJSOptions) =>
   const { registerInert = true } = options;
   const { routes, assets } = AdminRouter;
 
-  if (options.auth?.authenticate) {
-    if (options.auth.strategy && options.auth.strategy !== 'session') {
-      throw new Error(`When you give auth.authenticate as a parameter, auth strategy is set to 'session'.
-                       Please remove auth.strategy from authentication parameters.
-                      `);
+  if (options.auth) {
+    if (!options.auth.authenticate && !options.auth.provider) {
+      throw new Error(MISSING_AUTH_CONFIG_ERROR);
     }
-    options.auth.strategy = 'session';
 
-    if (!options.auth.cookiePassword) {
-      throw new Error('You have to give auth.cookiePassword parameter if you want to use authenticate function.');
+    if (options.auth.authenticate && options.auth.provider) {
+      throw new Error(INVALID_AUTH_CONFIG_ERROR);
+    }
+
+    if (options.auth.authenticate || options.auth.provider) {
+      if (options.auth.strategy && options.auth.strategy !== 'session') {
+        throw new Error(`When you give auth.authenticate as a parameter, auth strategy is set to 'session'.
+                         Please remove auth.strategy from authentication parameters.
+                        `);
+      }
+      options.auth.strategy = 'session';
+
+      if (!options.auth.cookiePassword) {
+        throw new Error('You have to give auth.cookiePassword parameter if you want to use authenticate function.');
+      }
+    }
+
+    if (options.auth.provider) {
+      options.env = {
+        ...options.env,
+        ...options.auth.provider.getUiProps(),
+      };
     }
   }
 
   const admin = new AdminJS(options);
   await admin.initialize();
 
-  if (options.auth?.authenticate) {
+  if (options.auth?.authenticate || options.auth?.provider) {
     await sessionAuth(server, admin);
   }
 

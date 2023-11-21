@@ -9,15 +9,18 @@ interface AuthRequestPayload {
   password: string;
 }
 
+const MISSING_PROVIDER_ERROR = '"provider" has to be configured to use refresh token mechanism';
+
 /**
  * Creates authentication logic for admin users
  */
 const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
   const options = adminJs.options as ExtendedAdminJSOptionsWithDefault;
-  const { loginPath, logoutPath, rootPath } = options;
+  const { loginPath, logoutPath, refreshTokenPath, rootPath } = options;
   const {
     cookiePassword,
     authenticate,
+    provider,
     isSecure,
     defaultMessage,
     cookieName,
@@ -25,9 +28,11 @@ const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
     ...other
   } = options.auth;
 
-  if (!authenticate) {
-    throw new Error('"authenticate" function must be provided for authenticated access');
+  if (!authenticate && !provider) {
+    throw new Error('"authenticate" or "provider" must be configured for authenticated access');
   }
+
+  const providerProps = provider ? provider.getUiProps() : {};
 
   // example authentication is based on the cookie store
   await server.register(HapiAuthCookie);
@@ -51,23 +56,34 @@ const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
     },
     handler: async (request, h) => {
       try {
-        let errorMessage = defaultMessage;
+        let errorMessage = defaultMessage as string;
         if (request.method === 'post') {
-          const { email, password } = request.payload as AuthRequestPayload;
-          const admin = await authenticate(email, password);
-          if (admin) {
-            request.cookieAuth.set(admin);
+          const ctx = { request, h };
+          let adminUser;
+          if (provider) {
+            adminUser = await provider.handleLogin(
+              {
+                headers: request.headers,
+                query: request.query,
+                params: request.params,
+                data: (request.payload as Record<string, unknown>) ?? {},
+              },
+              ctx
+            );
+          } else {
+            const { email, password } = request.payload as AuthRequestPayload;
+            adminUser = await authenticate!(email, password, ctx);
+          }
+
+          if (adminUser) {
+            request.cookieAuth.set(adminUser);
             return h.redirect(rootPath);
           }
           errorMessage = 'invalidCredentials';
         }
 
-        // AdminJS exposes function which renders login form for us.
-        // It takes 2 arguments:
-        // - options.action (with login path)
-        // - [errorMessage] optional error message - visible when user
-        //                  gives wrong credentials
-        return adminJs.renderLogin({ action: loginPath, errorMessage });
+        const baseProps = { action: loginPath, errorMessage };
+        return adminJs.renderLogin({ ...baseProps, ...providerProps });
       } catch (e) {
         console.log(e);
         throw e;
@@ -80,8 +96,60 @@ const sessionAuth = async (server: Hapi.Server, adminJs: AdminJS) => {
     path: logoutPath,
     options: { auth: false },
     handler: async (request, h) => {
+      if (provider) {
+        await provider.handleLogout({
+          headers: request.headers,
+          query: request.query,
+          params: request.params,
+          data: (request.payload as Record<string, unknown>) ?? {},
+        });
+      }
       request.cookieAuth.clear();
       return h.redirect(loginPath);
+    },
+  });
+
+  server.route({
+    method: 'POST',
+    path: refreshTokenPath,
+    options: {
+      auth: { mode: 'try', strategy: 'session' },
+      plugins: { cookie: { redirectTo: false } },
+    },
+    handler: async (request, h) => {
+      if (!provider) {
+        throw new Error(MISSING_PROVIDER_ERROR);
+      }
+
+      const updatedAuthInfo = await provider.handleRefreshToken(
+        {
+          data: (request.payload as Record<string, unknown>) ?? {},
+          query: request.query,
+          params: request.params,
+          headers: request.headers,
+        },
+        { request, h }
+      );
+
+      let adminObject = Array.isArray(request.auth?.credentials)
+        ? request.auth?.credentials?.[0]
+        : request.auth?.credentials;
+
+      if (!adminObject) {
+        adminObject = {};
+      }
+
+      if (!adminObject._auth) {
+        adminObject._auth = {};
+      }
+
+      adminObject._auth = {
+        ...adminObject._auth,
+        ...updatedAuthInfo,
+      };
+
+      request.cookieAuth.set(adminObject);
+      return h.response(adminObject);
     },
   });
 };
